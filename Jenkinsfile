@@ -14,26 +14,8 @@ pipeline {
    
     stages {
 
-        stage('Checkout') {
-            steps {
-                git branch: 'master', credentialsId: 'git-credentials', url: 'https://github.com/d21it181/pract_exam_devops.git'
-            }
-        }
-        stage('init'){
-            steps{
-                script{
-                    gv = load "script.groovy"
-                    //sh "git clone https://github.com/learnwithparth/springboot-jenkins.git"
-                }
-            }
-        }
-        stage('config'){
-            steps{
-                script{
-                    gv.config()
-                }
-            }
-        }
+        
+      
         stage('build') {
             
             steps {
@@ -77,17 +59,7 @@ pipeline {
                 
              }
         }
-        stage('deploy'){
-            steps{
-                script{
-                    def dockerRestart = 'sudo service docker restart'
-                    def dockerRunCmd = "sudo docker run -p 8080:8080 -d learnwithparth/spring-boot:${IMAGE_NAME}"
-                  sshagent(['ec2-prod']) {
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@54.237.0.178 ${dockerRunCmd}"
-                    }  
-                }
-            }
-        }
+        
 
         // stage('commit and push to git'){
         //     steps{
