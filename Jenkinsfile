@@ -22,10 +22,8 @@ pipeline {
                 script{
                     echo 'building the application'
                     echo "Software version is ${NEW_VERSION}"
-                    sh 'mvn build-helper:parse-version versions:set -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.nextMinorVersion}.\\\${parsedVersion.incrementalVersion}\\\${parsedVersion.qualifier?}' 
-                    sh 'mvn clean package'
-                    def version = (readFile('pom.xml') =~ '<version>(.+)</version>')[0][1]
-                    env.IMAGE_NAME = "$version-Build-$BUILD_NUMBER"
+                    
+                    env.IMAGE_NAME = 10
                     sh "docker build -t mayur181/spring-boot:${IMAGE_NAME} ."    
                     }
             }
