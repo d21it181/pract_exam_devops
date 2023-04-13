@@ -11,11 +11,7 @@ pipeline {
         booleanParam(name: 'executeTest', defaultValue : true, description: '')
     }
   
-    
-    tools{
-        maven 'maven-3.9.0'
-    }
-
+   
     stages {
 
         stage('Checkout') {
